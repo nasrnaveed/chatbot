@@ -28,7 +28,7 @@ def on_upload_change(change):
 
 # Function to start the chatbot with a text input widget
 def start_chatbot(pdf_text):
-    print("Configuring PaLM...")  # Debugging
+    print("Configuring Bot...")  # Debugging
     palm.configure(api_key='API KEY') #Add your own :)
 
     models = [m for m in palm.list_models() if 'generateText' in m.supported_generation_methods]
@@ -43,7 +43,7 @@ def start_chatbot(pdf_text):
         )
         return response.result
 
-    print("Welcome to PaLM Bot! Type 'exit' to end the conversation.")
+    print("Welcome to Doc ChatBot! Type 'exit' to end the conversation.")
     pdf_context = pdf_text  # Use the extracted text from the uploaded PDF
 
     # Create text input widget for user interaction
@@ -57,12 +57,12 @@ def start_chatbot(pdf_text):
         input_box.value = ''  # Clear the input box
         if user_input.lower() == 'exit':
             with output_box:
-                print("PaLM Bot: Goodbye!")
+                print("Bot: Goodbye!")
         else:
             response = chat_with_palm(user_input, pdf_context)
             with output_box:
                 print(f"You: {user_input}")
-                print(f"PaLM Bot: {response}")
+                print(f"Bot: {response}")
 
     input_box.on_submit(on_text_submit)
 
